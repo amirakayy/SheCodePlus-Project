@@ -1,14 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+      crossorigin="anonymous"
+    />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <title>The Weather App</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="src/style.css" />
   </head>
-  <body>
-    <h1>Hello Git</h1>
+  <body class="bg">
+    <div class="container">
+      <div class="row">
+        <h1>Check the Weather in Your Area</h1>
+      </div>
+      <div class="row">
+        <form class="formOne col-3">
+          <input type="search" placeholder="enter city" value="London" />
+          <button type="submit" class="btn btn-outline-primary btn-sm">
+            Search
+          </button>
+        </form>
+        <form class="formTwo col-9">
+          <button
+            type="submit"
+            class="btn btn-outline-primary btn-sm"
+            id="secondbutton"
+          >
+            Current Location
+          </button>
+        </form>
+      </div>
+      <div class="row">
+        <div class="card text-center">
+          <div class="card-header">London, Great Britian</div>
+          <div class="card-body">
+            <h5 class="card-title">April 24th, 2021</h5>
+            <p class="card-text">
+              Todays high is <span class="temperatureHigh"> 18° </span> the low
+              is
+              <span class="temperatureLow"> 12°</span>
+            </p>
+            <img src="src/sunny.png" width="100" />
+          </div>
+          <div class="card-footer text-muted">Today</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 title-forcast">Your 4 Day Forcast</div>
+        <div class="col-1"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="card">
+            <img src="src/weatherapp.png" class="card-img-top" alt="weather" />
+            <div class="card-body">
+              <h5 class="card-title">Tomorrow</h5>
+              <p class="card-text">
+                Sunshine with a slight breeze <br />
+                <span class="temperature"> 18° / 2°</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <img src="src/weatherapp.png" class="card-img-top" alt="weather" />
+            <div class="card-body">
+              <h5 class="card-title">Wednesday</h5>
+              <p class="card-text">
+                Sunny with clouds <br />
+                <span class="temperature"> 13° / 2° </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <img src="src/weatherapp.png" class="card-img-top" alt="weather" />
+            <div class="card-body">
+              <h5 class="card-title">Thursday</h5>
+              <p class="card-text">
+                Sunshine with no clouds<br />
+                <span class="temperature"> 16° / 4° </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <img src="src/weatherapp.png" class="card-img-top" alt="weather" />
+            <div class="card-body">
+              <h5 class="card-title">Friday</h5>
+              <p class="card-text">
+                Cloudy with a chance of rain <br />
+                <span class="temperature"> 7° / 4°</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="src/script.js"></script>
   </body>
 </html>

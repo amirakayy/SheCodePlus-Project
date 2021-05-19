@@ -1,0 +1,67 @@
+.bg {
+  background-image: url("cloud2.png");
+  background-size: 100% 100%;
+}
+body {
+  font-family: "Inconsolata", monospace;
+  height: 100%;
+}
+html {
+  height: 100%;
+}
+h1 {
+  color: black;
+  text-align: center;
+  padding: 20px;
+  font-family: "Inconsolata", monospace;
+  font-weight: 500px;
+}
+.card-text {
+  font-size: 12px;
+  line-break: strict;
+}
+h5 {
+  font-size: 14px;
+  font-weight: 900;
+  color: blue;
+}
+.title-forcast {
+  text-align: center;
+  background: blue;
+  color: white;
+  border-radius: 20px;
+  border: 2px solid white;
+  margin: 20px 0;
+}
+form {
+  padding: 10px;
+}
+.temperature {
+  font-weight: bolder;
+  font-size: 14px;
+}
+.temperatureHigh,
+.temperatureLow {
+  font-size: 14px;
+  font-weight: bolder;
+}
+.card-header {
+  font-weight: bold;
+  font-size: 30px;
+}
+#secondbutton {
+  background: blue;
+  color: white;
+  border-color: black;
+}
+#secondbutton:hover {
+  color: blue;
+  background: white;
+}
+.formOne button {
+  background: white;
+  color: blue;
+}
+.formTwo {
+  margin: 0;
+}
