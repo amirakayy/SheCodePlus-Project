@@ -65,3 +65,9 @@ form {
 .formTwo {
   margin: 0;
 }
+footer {
+  color: white;
+  background: black;
+  margin: 20px;
+  width: fit-content;
+}
