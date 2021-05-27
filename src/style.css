@@ -71,3 +71,10 @@ footer {
   margin: 20px;
   width: fit-content;
 }
+.form-check-label {
+  text-align: left;
+  font-size: 12px;
+}
+.form-check.form-switch {
+  text-align: left;
+}

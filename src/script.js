@@ -50,6 +50,8 @@ function afterTemperatureIsFetched(response) {
     let roundTemperature = Math.round(temperature);
     let replaceHeading = document.querySelector(cssClass);
     replaceHeading.innerHTML = `${roundTemperature}°C`;
+    celsiusTemperatureHigh = response.data.main.temp_max;
+    celsiusTemperatureLow = response.data.main.temp_min;
   }
   replaceTemperature(response.data.main.temp_max, ".temperatureHigh");
   replaceTemperature(response.data.main.temp_min, ".temperatureLow");
@@ -83,3 +85,29 @@ function afterCurrentLocationSubmitted(event) {
 }
 let formTwo = document.querySelector(".formTwo");
 formTwo.addEventListener("submit", afterCurrentLocationSubmitted);
+
+let celsiusTemperatureHigh = null;
+let celsiusTemperatureLow = null;
+
+function conversionEquation(event) {
+  let highTemperature = document.querySelector(".temperatureHigh");
+  let lowTemperature = document.querySelector(".temperatureLow");
+
+  let convertToFahrenheit = event.srcElement.checked;
+  if (convertToFahrenheit) {
+    let imperialTemperatureEquation = (celsiusTemperatureHigh * 9) / 5 + 32;
+    imperialTemperature = Math.round(imperialTemperatureEquation);
+    highTemperature.innerHTML = ` ${imperialTemperature}°F`;
+    let imperialTemperatureEquationLow = (celsiusTemperatureLow * 9) / 5 + 32;
+    imperialTemperatureLow = Math.round(imperialTemperatureEquationLow);
+    lowTemperature.innerHTML = ` ${imperialTemperatureLow}°F`;
+  } else {
+    imperialTemperature = Math.round(celsiusTemperatureHigh);
+    highTemperature.innerHTML = ` ${imperialTemperature}°C`;
+    imperialTemperatureLow = Math.round(celsiusTemperatureLow);
+    lowTemperature.innerHTML = ` ${imperialTemperatureLow}°C`;
+  }
+}
+
+let convert = document.querySelector("#flexSwitchCheckDefault");
+convert.addEventListener("click", conversionEquation);
