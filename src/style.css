@@ -78,3 +78,16 @@ footer {
 .form-check.form-switch {
   text-align: left;
 }
+.weather-forcast {
+  text-decoration: bold;
+  text-align: center;
+  background: white;
+}
+.weather-forcast-date {
+  font-size: 20px;
+  color: blue;
+  font-size: 20px;
+}
+.weather-forcast-temperature {
+  font-size: 12px;
+}

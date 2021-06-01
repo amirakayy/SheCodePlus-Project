@@ -30,20 +30,46 @@ let month = months[rightNow.getMonth()];
 
 let changeTitle = document.querySelector(".card-title");
 changeTitle.innerHTML = `Today is ${month} ${date} ${day} , it is ${hours}:${minutes}`;
+
+function displayForcast() {
+  let forcastElement = document.querySelector("#forcast");
+  let forcastHTML = `<div class="row">`;
+  let days = ["Thurs", "Fri", "Sat", "Sun"];
+  days.forEach(function (day) {
+    forcastHTML =
+      forcastHTML +
+      `  <div class="col-3">
+   <div class="weather-forcast-date">${day}</div>
+          <img
+            src="https://openweathermap.org/img/wn/01d@2x.png"
+            alt="weather"
+            width="36"
+          />
+          <br />
+          <div class="weather-forcast-temperature">
+            <span class="forcast-temperature-max"> 18°C </span> /
+            <span class="forcast-temperature-min"> 12°C </span>
+          </div>
+               </div>
+               `;
+  });
+  forcastHTML = forcastHTML + `</div>`;
+  forcastElement.innerHTML = forcastHTML;
+}
 function afterTemperatureIsFetched(response) {
   let cityName = response.data.name;
   let replaceCity = document.querySelector(".card-header");
   replaceCity.innerHTML = cityName;
   let fullreport = document.querySelector("#fullReport");
   fullreport.innerHTML = ` ${response.data.weather[0].description} <br>
-  it feels like ${response.data.main.feels_like}°C <br>
+  it feels like ${Math.round(response.data.main.feels_like)}°C <br>
   humidity is ${response.data.main.humidity}% <br> 
   the wind speed is ${response.data.wind.speed}MPH <br>
   the visibility is ${response.data.visibility} meters <br>`;
   let iconElement = document.querySelector("#updateIcon");
   iconElement.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
 
   function replaceTemperature(temperature, cssClass) {
@@ -52,6 +78,7 @@ function afterTemperatureIsFetched(response) {
     replaceHeading.innerHTML = `${roundTemperature}°C`;
     celsiusTemperatureHigh = response.data.main.temp_max;
     celsiusTemperatureLow = response.data.main.temp_min;
+    console.log(response.data.main);
   }
   replaceTemperature(response.data.main.temp_max, ".temperatureHigh");
   replaceTemperature(response.data.main.temp_min, ".temperatureLow");
@@ -111,3 +138,5 @@ function conversionEquation(event) {
 
 let convert = document.querySelector("#flexSwitchCheckDefault");
 convert.addEventListener("click", conversionEquation);
+
+displayForcast();
