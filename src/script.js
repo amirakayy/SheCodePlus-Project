@@ -31,7 +31,8 @@ let month = months[rightNow.getMonth()];
 let changeTitle = document.querySelector(".card-title");
 changeTitle.innerHTML = `Today is ${month} ${date} ${day} , it is ${hours}:${minutes}`;
 
-function displayForcast() {
+function displayForcast(response) {
+  console.log(response.data.daily);
   let forcastElement = document.querySelector("#forcast");
   let forcastHTML = `<div class="row">`;
   let days = ["Thurs", "Fri", "Sat", "Sun"];
@@ -71,7 +72,7 @@ function afterTemperatureIsFetched(response) {
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-
+  
   function replaceTemperature(temperature, cssClass) {
     let roundTemperature = Math.round(temperature);
     let replaceHeading = document.querySelector(cssClass);
@@ -82,6 +83,12 @@ function afterTemperatureIsFetched(response) {
   }
   replaceTemperature(response.data.main.temp_max, ".temperatureHigh");
   replaceTemperature(response.data.main.temp_min, ".temperatureLow");
+
+  function fourDayForcast(coords) {
+    let apiKey = "82388213c576612f9da26f93f68c7b2b";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayForcast);
+  } fourDayForcast(response.data.coord);
 }
 
 function afterSearchSubmitted(event) {
@@ -138,5 +145,3 @@ function conversionEquation(event) {
 
 let convert = document.querySelector("#flexSwitchCheckDefault");
 convert.addEventListener("click", conversionEquation);
-
-displayForcast();
