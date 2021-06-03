@@ -57,10 +57,10 @@ function displayForcast(response) {
           />
           <br />
           <div class="weather-forcast-temperature">
-            <span class="forcast-temperature-max"> ${Math.round(
+            <span class="forcast-temperature-max class="temperatureHigh"> ${Math.round(
               forcastDay.temp.max
             )}°C </span> /
-            <span class="forcast-temperature-min"> ${Math.round(
+            <span class="forcast-temperature-min" class="temperatureLow"> ${Math.round(
               forcastDay.temp.min
             )}°C </span>
           </div>
@@ -106,8 +106,7 @@ function afterTemperatureIsFetched(response) {
   fourDayForcast(response.data.coord);
 }
 
-function afterSearchSubmitted(event) {
-  event.preventDefault();
+function getWeatherFromInput() {
   let cityName = document.querySelector("input").value;
   console.log(cityName);
   let replaceCity = document.querySelector(".card-header");
@@ -116,6 +115,11 @@ function afterSearchSubmitted(event) {
   let apiKey = "82388213c576612f9da26f93f68c7b2b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(afterTemperatureIsFetched);
+}
+
+function afterSearchSubmitted(event) {
+  event.preventDefault();
+  getWeatherFromInput();
 }
 let form = document.querySelector(".formOne");
 form.addEventListener("submit", afterSearchSubmitted);
@@ -160,3 +164,5 @@ function conversionEquation(event) {
 
 let convert = document.querySelector("#flexSwitchCheckDefault");
 convert.addEventListener("click", conversionEquation);
+
+getWeatherFromInput();
