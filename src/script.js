@@ -31,28 +31,42 @@ let month = months[rightNow.getMonth()];
 let changeTitle = document.querySelector(".card-title");
 changeTitle.innerHTML = `Today is ${month} ${date} ${day} , it is ${hours}:${minutes}`;
 
+function formatDaysForcast(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let weekDay = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+
+  return weekDay[day];
+}
 function displayForcast(response) {
-  console.log(response.data.daily);
+  let forcast = response.data.daily;
   let forcastElement = document.querySelector("#forcast");
   let forcastHTML = `<div class="row">`;
-  let days = ["Thurs", "Fri", "Sat", "Sun"];
-  days.forEach(function (day) {
-    forcastHTML =
-      forcastHTML +
-      `  <div class="col-3">
-   <div class="weather-forcast-date">${day}</div>
+  forcast.forEach(function (forcastDay, index) {
+    if (index < 4) {
+      forcastHTML =
+        forcastHTML +
+        `  <div class="col-3">
+   <div class="weather-forcast-date">${formatDaysForcast(forcastDay.dt)}</div>
           <img
-            src="https://openweathermap.org/img/wn/01d@2x.png"
+            src="https://openweathermap.org/img/wn/${
+              forcastDay.weather[0].icon
+            }@2x.png"
             alt="weather"
             width="36"
           />
           <br />
           <div class="weather-forcast-temperature">
-            <span class="forcast-temperature-max"> 18°C </span> /
-            <span class="forcast-temperature-min"> 12°C </span>
+            <span class="forcast-temperature-max"> ${Math.round(
+              forcastDay.temp.max
+            )}°C </span> /
+            <span class="forcast-temperature-min"> ${Math.round(
+              forcastDay.temp.min
+            )}°C </span>
           </div>
                </div>
-               `;
+                `;
+    }
   });
   forcastHTML = forcastHTML + `</div>`;
   forcastElement.innerHTML = forcastHTML;
@@ -72,7 +86,7 @@ function afterTemperatureIsFetched(response) {
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-  
+
   function replaceTemperature(temperature, cssClass) {
     let roundTemperature = Math.round(temperature);
     let replaceHeading = document.querySelector(cssClass);
@@ -88,7 +102,8 @@ function afterTemperatureIsFetched(response) {
     let apiKey = "82388213c576612f9da26f93f68c7b2b";
     let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayForcast);
-  } fourDayForcast(response.data.coord);
+  }
+  fourDayForcast(response.data.coord);
 }
 
 function afterSearchSubmitted(event) {
